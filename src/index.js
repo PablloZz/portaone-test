@@ -9,5 +9,8 @@ numbers.pop();
 const sortedNumbers = numbers.toSorted((first, second) => first - second);
 
 const minNumber = sortedNumbers[0];
+const maxNumber = sortedNumbers[sortedNumbers.length - 1];
+
+console.log("Max number", maxNumber);
 console.log("Min number", minNumber);
 console.timeEnd();
