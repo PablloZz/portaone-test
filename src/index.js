@@ -14,13 +14,38 @@ const maxNumber = sortedNumbers[sortedNumbers.length - 1];
 const median = getMedian(sortedNumbers);
 const arithmeticMean = getArithmeticMean(sortedNumbers);
 
+let longestIncreasingSequence = [];
+let currentIncreasingSequence = [];
+
+for (let index = 0; index < numbers.length; index++) {
+  const nextIndex = index + 1;
+  const currentNumber = numbers[index];
+  const nextNumber = numbers[nextIndex];
+
+  if (index === 0) {
+    currentIncreasingSequence.push(currentNumber);
+  }
+
+  const isNextNumberGreater = nextNumber > currentNumber;
+
+  if (isNextNumberGreater) {
+    currentIncreasingSequence.push(nextNumber);
+  } else {
+    const isLongestSequence =
+      currentIncreasingSequence.length > longestIncreasingSequence.length;
+
+    if (isLongestSequence) {
+      longestIncreasingSequence = [...currentIncreasingSequence];
+      currentIncreasingSequence = [nextNumber];
+    } else {
+      currentIncreasingSequence = [nextNumber];
+    }
+  }
+}
+
 console.log(
   "The longest increasing sequence of numbers",
   longestIncreasingSequence
-);
-console.log(
-  "The longest decreasing sequence of numbers",
-  longestDecreasingSequence
 );
 console.log("Arithmetic mean", arithmeticMean);
 console.log("Median", median);
