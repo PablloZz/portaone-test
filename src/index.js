@@ -16,6 +16,8 @@ const arithmeticMean = getArithmeticMean(sortedNumbers);
 
 let longestIncreasingSequence = [];
 let currentIncreasingSequence = [];
+let longestDecreasingSequence = [];
+let currentDecreasingSequence = [];
 
 for (let index = 0; index < numbers.length; index++) {
   const nextIndex = index + 1;
@@ -41,8 +43,28 @@ for (let index = 0; index < numbers.length; index++) {
       currentIncreasingSequence = [nextNumber];
     }
   }
+
+  const isNextNumberLess = nextNumber < currentNumber;
+
+  if (isNextNumberLess) {
+    currentDecreasingSequence.push(nextNumber);
+  } else {
+    const isLongestSequence =
+      currentDecreasingSequence.length > longestDecreasingSequence.length;
+
+    if (isLongestSequence) {
+      longestDecreasingSequence = [...currentDecreasingSequence];
+      currentDecreasingSequence = [nextNumber];
+    } else {
+      currentDecreasingSequence = [nextNumber];
+    }
+  }
 }
 
+console.log(
+  "The longest decreasing sequence of numbers",
+  longestDecreasingSequence
+);
 console.log(
   "The longest increasing sequence of numbers",
   longestIncreasingSequence
